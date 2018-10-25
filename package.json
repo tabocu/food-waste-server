@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/tabocu/food-waste-server/issues"
   },
-  "homepage": "https://github.com/tabocu/food-waste-server#readme"
+  "homepage": "https://github.com/tabocu/food-waste-server#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "glpk.js": "^2.0.1"
+  }
 }
