@@ -1,18 +1,5 @@
 var glpk = require("./node_modules/glpk.js");
 
-var res = {
-  name: "Food Waste",
-  time: 0.116,
-  result: {
-    vars: {
-      "Receita A": 0.6,
-      "Receita B": 0.2
-  },
-    z: 0.45999999999999996,
-    status: 5
-  }
-}
-
 function getVars(json) {
   let vars = [];
   let jsonKeys = Object.keys(json);
