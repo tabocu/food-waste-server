@@ -68,17 +68,18 @@ let GLPK_IN = {
         { name: 'Receita A', coef: 1.0 },
         { name: 'Receita B', coef: 2.0 }
       ],
-      bnds: { type: glpk.GLP_UP, ub: 1.0, lb: 0.0 }
+      bnds: { type: glpk.GLP_UP, ub: 10.0, lb: 0.0 }
     },
     {
       name: 'Alimento 2',
       vars: [
         { name: 'Receita A', coef: 3.0 },
-        { name: 'Receita B', coef: 1.0 }
+        { name: 'Receita B', coef: 1.5 }
       ],
-      bnds: { type: glpk.GLP_UP, ub: 2.0, lb: 0.0 }
+      bnds: { type: glpk.GLP_UP, ub: 20.0, lb: 0.0 }
     }
-  ]
+  ],
+  generals: ['Receita A', 'Receita B']
 };
 
 module.exports = {

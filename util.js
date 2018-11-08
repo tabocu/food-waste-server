@@ -47,11 +47,12 @@ function getSubjectTo(json) {
 }
 
 module.exports = {
-  getGlpkFormatt: function(json) {
+  getGlpkFormat: function(json) {
     let result = {
       name: 'Food Waste',
       objective: getObjective(json.objetiva),
       subjectTo: getSubjectTo(json.restricoes),
+      generals: Object.keys(json.objetiva),
     }
     return result;
   },
