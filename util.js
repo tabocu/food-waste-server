@@ -46,6 +46,34 @@ function getSubjectTo(json) {
   return subjectTo;
 }
 
+function getSobras(jsonInputFW, jsonOutputGlpk) {
+  var sobras = {};
+
+  var receitas = jsonOutputGlpk.result.vars;
+  var receitasKeys = Object.keys(receitas);
+
+  var alimentos = jsonInputFW.restricoes;
+  var alimentosKeys = Object.keys(alimentos);
+  
+  for (let alimentoKey of alimentosKeys) {
+    let alimento = alimentos[alimentoKey];
+
+    var sobra = alimento.max;
+
+    for (let receitaKey of receitasKeys) {
+      let receitaQnt = receitas[receitaKey];
+      if (receitaKey in alimento.receitas) {
+        //sobras[receitaKey] = alimento.receitas[receitaKey] * receitaQnt;
+        sobra -= alimento.receitas[receitaKey] * receitaQnt;
+      }
+    }
+    sobras[alimentoKey] = sobra; 
+    console.log(alimentoKey + ": " + sobra);
+  }  
+
+  return sobras;
+}
+
 module.exports = {
   getGlpkFormat: function(json) {
     let result = {
@@ -57,12 +85,13 @@ module.exports = {
     return result;
   },
 
-  getFoodWasteFormat: function(json) {
+  getFoodWasteFormat: function (jsonInputFW, jsonOutputGlpk) {
     let result = {
-      tempo: json.time,
-      quantidades: json.result.vars,
-      lucro: json.result.z,
-      status: json.result.status 
+      tempo: jsonOutputGlpk.time,
+      quantidades: jsonOutputGlpk.result.vars,
+      lucro: jsonOutputGlpk.result.z,
+      sobras: getSobras(jsonInputFW, jsonOutputGlpk),
+      status: jsonOutputGlpk.result.status 
     };
     return result;
   }

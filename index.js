@@ -23,8 +23,8 @@ app.post("/opt", (req, res, next) => {
   let parsed = util.getGlpkFormat(req.body);
   console.log("running opt post"); 
   let optm = glpk.solve(parsed, glpk.GPL_MSG_ALL);
-  // console.log("running opt post"); 
-  let parsedBack = util.getFoodWasteFormat(optm);
+  console.log("running opt post"); 
+  let parsedBack = util.getFoodWasteFormat(req.body, optm);
   console.log(parsedBack);
   res.send(parsedBack);
 });
