@@ -54,23 +54,20 @@ function getSobras(jsonInputFW, jsonOutputGlpk) {
 
   var alimentos = jsonInputFW.restricoes;
   var alimentosKeys = Object.keys(alimentos);
-  
+
   for (let alimentoKey of alimentosKeys) {
     let alimento = alimentos[alimentoKey];
-
     var sobra = alimento.max;
-
     for (let receitaKey of receitasKeys) {
       let receitaQnt = receitas[receitaKey];
       if (receitaKey in alimento.receitas) {
-        //sobras[receitaKey] = alimento.receitas[receitaKey] * receitaQnt;
         sobra -= alimento.receitas[receitaKey] * receitaQnt;
       }
     }
     sobras[alimentoKey] = sobra; 
     console.log(alimentoKey + ": " + sobra);
-  }  
-
+  }
+  
   return sobras;
 }
 
